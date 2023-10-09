@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!--FIM-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://kit.fontawesome.com/f1e7ea2e0e.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="image/code.png" type="image/x-icon">
     <link
@@ -17,17 +18,22 @@
   />
     <title>Portfolio website</title>
 </head>
-<body >
-                <nav class="menu-desktop">
-                    <ul>
-                        <li><a href="#about">Sobre <i class="fa-solid fa-address-card"></i></a></li>
-                        <li><a href="#services">Meus Serviços <i class="fa-solid fa-briefcase"></i></a></li>
-                        <li><a href="#portfolio">Meu Trabalho <i class="fa-solid fa-magnifying-glass"></i></a></li></div>
-                    </ul>
+<body>
+        
+        <div class="container" >
+                <nav>
+                    <ul id="sidemenu">
+                        <li ><a href="#about">Sobre</a></li>
+                        <li><a href="#services">Meus Serviços</a></li>
+                        <li><a href="#portfolio">Meu Trabalho</a></li>
+                        <i class="fas fa-times" onclick="closemenu()"></i>
+                   
+                    </ul> <i id="psn" class="fas fa-bars" onclick="openmenu()"></i>
                 </nav>
-                      <div class="logo"> 
+            </div>
+                      <div class="logo "> 
                           <a href="#">
-                              <img src="image/newphoto.jpeg" style="width: 150px; border-radius: 50%;">
+                              <img src="" style="width: 150px; border-radius: 50%; margin-bottom: -100%; margin-left: auto; margin-right: auto; display: flex;  justify-content: center; align-items: center;  position: relative">
                           </a>                   
                       </div> <!--LOGO-->
                
@@ -43,7 +49,7 @@
     <section id="about">
             <div class="row">
                 <div class="about-col-1">
-                    <img src="image/space.jpg" alt="photo">
+                    <img src="image/newphoto.jpeg" alt="photo">
                 </div>
                 <div class="about-col-2">
                     <h1 class="sub-title">Sobre mim</h1>
@@ -53,15 +59,19 @@
                         <div class="skill-bar">
                             <div class="skill">
                                 <div class="skill-name">HTML</div>
-                                <div class="skill-level" style="width: 90%;">90%</div>
+                                <div class="skill-level" style="width: 70%;">70%<i class="fa-brands fa-html5"></i></div>
                             </div>
                             <div class="skill">
                                 <div class="skill-name">CSS</div>
-                                <div class="skill-level" style="width: 80%;">80%</div>
+                                <div class="skill-level" style="width: 50%;">50%<i class="fa-brands fa-css3-alt"></i></div>
                             </div>
                             <div class="skill">
                                 <div class="skill-name">JavaScript</div>
-                                <div class="skill-level" style="width: 70%;">70%</div>
+                                <div class="skill-level" style="width: 40%;">40% <i class="fa-brands fa-square-js"></i></div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-name">C#</div>
+                                <div class="skill-level" style="width: 15%;">15% 😥</div>
                             </div>
                         </div>
                            
@@ -155,44 +165,28 @@
                     <a href="https://www.linkedin.com/in/vitor-c-da-silva-0669a4251/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
                     <a href="https://github.com/vitorCamoos" target="_blank"><i class="fa-brands fa-github"></i></a>
                 </div>
-                <a href="image/TI.docx" download class="btn">Download CV</a>
+               <button> <a href="image/TI.docx" download class="botao">Download CV</a></button>
             </div>
             <div class="contact-right">
                 <div class="contact-right">
-                    <form name="submit-to-google-sheet">
+
+                    <form name="submit-to-google-sheet" onsubmit="return verificarRecaptcha();"  action="seu_script_de_processamento.php" method="post">
                         <input type="text" name="Name" placeholder="Seu Nome" required>
                         <input type="email" name="email" placeholder="Seu Email" required>
                         <textarea name="Message" rows="6" placeholder="Sua mensagem"></textarea>
                         <button type="submit" class="btn btn2">Enviar</button>
+                        <div class="g-recaptcha" data-sitekey="6LevBYgoAAAAAMr3deELRuWr6AAVkjkVATJ5uCrM
+                        "></div>
+                        
                     </form>
-                    <span id="msg"></span>
-                </div>
-                <footer class="copyright">
-                    <p>copyright © Vitor. Site feito <i class="fa-solid fa-gear"></i> por mim </p>
+                     <footer class="copyright" id="footer_content">
+                    <p>copyright © Vitor. <strong style="color: teal;">Site feito  por mim</strong> <i class="fa-solid fa-fire"></i></p>
                 </footer>
-            
-                <script>
-                    const scriptURL = 'AKfycbyvJzYuUqZH_WkAOXtNtwjqgcbOC1-EeT6PpOyLJVhYYeI9UEpQ2O6HWmBSPGXu0XEO';
-                    const form = document.forms['submit-to-google-sheet'];
-                    const msg = document.getElementById("msg");
-            
-                    form.addEventListener('submit', e => {
-                        e.preventDefault();
-                        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                            .then(response => {
-                                msg.innerHTML = "Mensagem enviada com sucesso";
-                                setTimeout(function() {
-                                    msg.innerHTML = "";
-                                }, 5000);
-                                form.reset();
-                            })
-                            .catch(error => console.log('Error!', error.message));
-                    });
-                </script>
-            
-                <script>
-                   
-                </script>
-
+                </div>
+               
+            </div>
+               <script src="script.js"></script>
+               <script src="particles.js"></script>
+               <script src="app.js"></script>
             </body>
             </html>
